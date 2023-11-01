@@ -40,31 +40,7 @@ fun SearchScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text("Comic Books")
-                },
-                actions = {
-                    IconButton(onClick = { }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_search),
-                            contentDescription = null,
-                            tint = Color.White,
-                        )
-                    }
-                    IconButton(onClick = { }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_shopping_cart),
-                            contentDescription = null,
-                            tint = Color.White,
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color.Red,
-                    titleContentColor = Color.White,
-                ),
-            )
+            AppBar()
         },
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
@@ -76,6 +52,36 @@ fun SearchScreen(
             }
         }
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun AppBar() {
+    TopAppBar(
+        title = {
+            Text("Comic Books")
+        },
+        actions = {
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_search),
+                    contentDescription = null,
+                    tint = Color.White,
+                )
+            }
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_shopping_cart),
+                    contentDescription = null,
+                    tint = Color.White,
+                )
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = Color.Red,
+            titleContentColor = Color.White,
+        ),
+    )
 }
 
 @Composable
