@@ -1,5 +1,6 @@
 package br.com.allysonjeronimo.marvelcomicbookshop.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.allysonjeronimo.marvelcomicbookshop.R
 import br.com.allysonjeronimo.marvelcomicbookshop.model.ComicBook
+import coil.compose.AsyncImage
 
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,28 +46,62 @@ fun DetailScreen(
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
             ImageGallery()
-            Column(modifier = Modifier.padding(12.dp)) {
-                Text(
-                    "R$ 9,99",
-                    fontSize = 42.sp,
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Text("Descrição", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    "Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla",
-                    fontSize = 18.sp,
-                    color = Color.Gray,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text("Ver descrição completa")
-                }
-            }
+            Content()
         }
     }
+}
+
+@Composable
+private fun Content() {
+    Column(modifier = Modifier.padding(12.dp)) {
+        Text(
+            "R$ 9,99",
+            fontSize = 42.sp,
+        )
+        Separator()
+        Spacer(modifier = Modifier.height(12.dp))
+        Text("Descrição", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            "Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla Bla bla bla bla bla bla bla bla bla",
+            fontSize = 18.sp,
+            color = Color.Gray,
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis,
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedButton(onClick = { /*TODO*/ }) {
+            Text("Ver descrição completa")
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Separator()
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red,
+            ),
+            onClick = {},
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_shopping_cart),
+                contentDescription = null,
+                modifier = Modifier.padding(end = 12.dp),
+            )
+            Text("Comprar", fontSize = 24.sp)
+        }
+    }
+}
+
+@Composable
+private fun Separator() {
+    Box(
+        modifier =
+        Modifier
+            .height(1.dp)
+            .fillMaxWidth()
+            .background(Color.LightGray),
+    ) {}
 }
 
 @Composable
@@ -85,10 +123,7 @@ private fun ImageGallery() {
                 .weight(1f),
             contentAlignment = Alignment.Center,
         ) {
-            Text(
-                "Galera de Imagens",
-                color = Color.White,
-            )
+
         }
         IconButton(onClick = { }) {
             Icon(
