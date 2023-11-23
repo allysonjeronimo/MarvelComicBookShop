@@ -1,6 +1,9 @@
 package br.com.allysonjeronimo.marvelcomicbookshop.presentation
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,12 +22,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.allysonjeronimo.marvelcomicbookshop.DetailActivity
 import br.com.allysonjeronimo.marvelcomicbookshop.R
 import br.com.allysonjeronimo.marvelcomicbookshop.extensions.currencyFormat
 import br.com.allysonjeronimo.marvelcomicbookshop.model.ComicBook
@@ -38,6 +43,9 @@ fun SearchScreen(
         ComicBook(id = "3", title = "Amazing Fantasy"),
     ),
 ) {
+    // Contexto, necessário para realizar navegação
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             AppBar()
@@ -48,10 +56,17 @@ fun SearchScreen(
                 ComicBookCard(
                     title = comicBook.title,
                     price = comicBook.price,
-                )
+                ) {
+                    goToDetailScreen(context)
+                }
             }
         }
     }
+}
+
+private fun goToDetailScreen(context: Context) {
+    val intent = Intent(context, DetailActivity::class.java)
+    context.startActivity(intent)
 }
 
 @Composable
@@ -85,11 +100,16 @@ private fun AppBar() {
 }
 
 @Composable
-fun ComicBookCard(title: String, price: Float = 0f) {
+fun ComicBookCard(title: String, price: Float = 0f, onComicBookClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp),
+            .padding(4.dp)
+            .clickable(
+                onClick = {
+                    onComicBookClick()
+                },
+            ),
     ) {
         Row {
             ImageBox()

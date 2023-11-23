@@ -2,6 +2,7 @@ package br.com.allysonjeronimo.marvelcomicbookshop.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.allysonjeronimo.marvelcomicbookshop.R
 import br.com.allysonjeronimo.marvelcomicbookshop.model.ComicBook
-import coil.compose.AsyncImage
 
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
@@ -123,7 +123,10 @@ private fun ImageGallery() {
                 .weight(1f),
             contentAlignment = Alignment.Center,
         ) {
-
+            Image(
+                painter = painterResource(id = R.drawable.v),
+                contentDescription = null,
+            )
         }
         IconButton(onClick = { }) {
             Icon(
